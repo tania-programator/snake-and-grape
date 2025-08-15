@@ -74,6 +74,28 @@ let grapeReady = true; // чи дозволено створювати нови�
 let grapeCount = 0; // кількість доступних "плювків"
 let seeds = []; // активні кісточки
 
+//Розблокування звууків
+let audioUnlocked = false;
+
+// === Функція для безпечного відтворення звуків ===
+function playSound(sound) {
+	if (!audioUnlocked) return; // ще не можна відтворювати
+	sound.currentTime = 0;       // обнуляємо час, щоб звук завжди відтворювався з початку
+	sound.play().catch(e => console.log('Sound play failed', e));
+}
+
+
+document.addEventListener('click', () => {
+	if (!audioUnlocked) {
+		poisonSound.play().then(() => {
+			poisonSound.pause();
+			poisonSound.currentTime = 0;
+			audioUnlocked = true; // тепер можна відтворювати звук без помилок
+		}).catch(e => console.log('Audio unlock failed', e));
+	}
+}, { once: true });
+
+
 document.addEventListener('keydown', setDirection);
 
 function setDirection(e) {
@@ -336,7 +358,8 @@ function draw() {
 		head.y < 0 || head.y >= canvasSize ||
 		snake.some((segment) => segment.x === head.x && segment.y === head.y)
 	) {
-		collisionSound.play(); //Звук удару в стіну
+		//collisionSound.play(); Звук удару в стіну
+		playSound(collisionSound);
 		lives--;
 
 		if (lives > 0) {
@@ -349,7 +372,8 @@ function draw() {
 			// Коли життя закінчились — повна поразка
 			clearInterval(game);
 			gameOver = true;
-			gameOverSound.play(); //Звук програшу
+			//gameOverSound.play(); Звук програшу
+			playSound(gameOverSound);
 			// ОНОВЛЕННЯ! Намалювати розбиті серця перед екраном поразки
 			drawHearts();
 			drawGameOverScreen();
