@@ -577,31 +577,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-	// Управління свайпами
-	let touchStartX = 0;
-	let touchStartY = 0;
-
-	canvas.addEventListener('touchstart', e => {
-		touchStartX = e.touches[0].clientX;
-		touchStartY = e.touches[0].clientY;
-	});
-
-	canvas.addEventListener('touchend', e => {
-		const touchEndX = e.changedTouches[0].clientX;
-		const touchEndY = e.changedTouches[0].clientY;
-
-		const dx = touchEndX - touchStartX;
-		const dy = touchEndY - touchStartY;
-
-		if (Math.abs(dx) > Math.abs(dy)) {
-			// Горизонтальний свайп
-			dir = dx > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 };
-		} else {
-			// Вертикальний свайп
-			dir = dy > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 };
-		}
-	});
-
 
 	// Обробка клавіш
 	document.addEventListener('keydown', (event) => {
