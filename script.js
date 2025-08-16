@@ -6,6 +6,8 @@ const box = 20;
 const canvasSize = 400;
 const rows = canvasSize / box;
 
+
+
 // === Завантаження зображень ===
 const foodImg = new Image();
 foodImg.src = 'img/food.png';

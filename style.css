@@ -13,6 +13,36 @@ canvas {
 	border: 20px solid #4CAF50;
 }
 
+#game {
+	width: 100%;
+	height: 100%;
+	max-width: 400px;
+	max-height: 400px;
+	display: block;
+}
+
+/* #game {
+	display: block;
+	aspect-ratio: 1 / 1;
+	/* квадрат */
+/* width: 80vw; */
+/* базовий розмір для мобільних */
+/* } */
+*/
+/* При екранах середньої ширини */
+/* @media (min-width: 600px) {
+	#game {
+		width: 60vw;
+	}
+} */
+
+/* При великих екранах (планшет/десктоп) */
+/* @media (min-width: 1024px) {
+	#game {
+		width: 40vw;
+	}
+} */
+
 /* Модальне вікно */
 .modal {
 	display: none;
@@ -29,6 +59,25 @@ canvas {
 	border-radius: 12px;
 	z-index: 1000;
 	min-width: 240px;
+}
+
+#game-over-modal {
+	position: absolute;
+	/* поверх канви */
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(23, 3, 248, 0.8);
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-size: 25px;
+	padding: 20px 30px;
+	border-radius: 10px;
+	text-align: center;
+	display: none;
+	/* ховаємо спочатку */
+	z-index: 10;
+	/* поверх канви */
+	color: #fff;
 }
 
 .modal-text {
@@ -55,5 +104,5 @@ canvas {
 }
 
 .btn.focused {
-	outline: 2px solid #fff;
+	outline: 5px solid #ffffff;
 }
