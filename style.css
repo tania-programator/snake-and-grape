@@ -11,6 +11,7 @@ body {
 canvas {
 	background: gold;
 	border: 20px solid #4CAF50;
+	padding: 0 5px;
 }
 
 #game {
@@ -21,27 +22,6 @@ canvas {
 	display: block;
 }
 
-/* #game {
-	display: block;
-	aspect-ratio: 1 / 1;
-	/* квадрат */
-/* width: 80vw; */
-/* базовий розмір для мобільних */
-/* } */
-*/
-/* При екранах середньої ширини */
-/* @media (min-width: 600px) {
-	#game {
-		width: 60vw;
-	}
-} */
-
-/* При великих екранах (планшет/десктоп) */
-/* @media (min-width: 1024px) {
-	#game {
-		width: 40vw;
-	}
-} */
 
 /* Модальне вікно */
 .modal {
