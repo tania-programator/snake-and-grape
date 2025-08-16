@@ -11,7 +11,7 @@ body {
 canvas {
 	background: gold;
 	border: 20px solid #4CAF50;
-	padding: 0 5px;
+	padding: 0 15px;
 }
 
 #game {
