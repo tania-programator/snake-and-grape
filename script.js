@@ -80,6 +80,27 @@ let seeds = []; // активні кісточки
 let touchStartX = 0;
 let touchStartY = 0;
 
+canvas.addEventListener('touchstart', (e) => {
+	const touch = e.touches[0];
+	touchStartX = touch.clientX;
+	touchStartY = touch.clientY;
+}, false);
+
+canvas.addEventListener('touchend', (e) => {
+	const touch = e.changedTouches[0];
+	const dx = touch.clientX - touchStartX;
+	const dy = touch.clientY - touchStartY;
+
+	if (Math.abs(dx) > Math.abs(dy)) {
+		if (dx > 0 && direction !== 'LEFT') direction = 'RIGHT';
+		else if (dx < 0 && direction !== 'RIGHT') direction = 'LEFT';
+	} else {
+		if (dy > 0 && direction !== 'UP') direction = 'DOWN';
+		else if (dy < 0 && direction !== 'DOWN') direction = 'UP';
+	}
+}, false);
+// --- КІНЕЦЬ КОДУ ДЛЯ СВАЙПІВ ---
+
 //Розблокування звуків
 let audioUnlocked = false;
 
@@ -603,22 +624,3 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 });
 
-canvas.addEventListener('touchstart', e => {
-	e.preventDefault();
-	touchStartX = e.touches[0].clientX;
-	touchStartY = e.touches[0].clientY;
-}, { passive: false });
-
-canvas.addEventListener('touchend', e => {
-	e.preventDefault();
-	const dx = e.changedTouches[0].clientX - touchStartX;
-	const dy = e.changedTouches[0].clientY - touchStartY;
-
-	if (Math.abs(dx) > Math.abs(dy)) {
-		if (dx > 0 && dir.x !== -1) dir = { x: 1, y: 0 };
-		else if (dx < 0 && dir.x !== 1) dir = { x: -1, y: 0 };
-	} else {
-		if (dy > 0 && dir.y !== -1) dir = { x: 0, y: 1 };
-		else if (dy < 0 && dir.y !== 1) dir = { x: 0, y: -1 };
-	}
-});
