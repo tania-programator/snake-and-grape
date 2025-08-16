@@ -12,6 +12,8 @@ canvas {
 	background: gold;
 	border: 20px solid #4CAF50;
 	padding: 0 15px;
+	touch-action: none;
+	/* забороняє прокрутку по канві */
 }
 
 #game {

@@ -7,6 +7,33 @@ const canvasSize = 400;
 const rows = canvasSize / box;
 
 
+let dir = { x: 1, y: 0 }; // початковий напрямок змійки
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+canvas.addEventListener('touchstart', e => {
+	e.preventDefault(); // блокуємо прокрутку
+	touchStartX = e.touches[0].clientX;
+	touchStartY = e.touches[0].clientY;
+}, { passive: false });
+
+canvas.addEventListener('touchend', e => {
+	e.preventDefault(); // блокуємо прокрутку
+	const touchEndX = e.changedTouches[0].clientX;
+	const touchEndY = e.changedTouches[0].clientY;
+
+	const dx = touchEndX - touchStartX;
+	const dy = touchEndY - touchStartY;
+
+	if (Math.abs(dx) > Math.abs(dy)) {
+		// горизонтальний свайп
+		dir = dx > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 };
+	} else {
+		// вертикальний свайп
+		dir = dy > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 };
+	}
+});
 
 // === Завантаження зображень ===
 const foodImg = new Image();
