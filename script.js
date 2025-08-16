@@ -7,33 +7,6 @@ const canvasSize = 400;
 const rows = canvasSize / box;
 
 
-let dir = { x: 1, y: 0 }; // початковий напрямок змійки
-
-let touchStartX = 0;
-let touchStartY = 0;
-
-canvas.addEventListener('touchstart', e => {
-	e.preventDefault(); // блокуємо прокрутку
-	touchStartX = e.touches[0].clientX;
-	touchStartY = e.touches[0].clientY;
-}, { passive: false });
-
-canvas.addEventListener('touchend', e => {
-	e.preventDefault(); // блокуємо прокрутку
-	const touchEndX = e.changedTouches[0].clientX;
-	const touchEndY = e.changedTouches[0].clientY;
-
-	const dx = touchEndX - touchStartX;
-	const dy = touchEndY - touchStartY;
-
-	if (Math.abs(dx) > Math.abs(dy)) {
-		// горизонтальний свайп
-		dir = dx > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 };
-	} else {
-		// вертикальний свайп
-		dir = dy > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 };
-	}
-});
 
 // === Завантаження зображень ===
 const foodImg = new Image();
@@ -102,6 +75,10 @@ let grapeTimer = null;
 let grapeReady = true; // чи дозволено створювати новий виноград
 let grapeCount = 0; // кількість доступних "плювків"
 let seeds = []; // активні кісточки
+
+// Свайпи
+let touchStartX = 0;
+let touchStartY = 0;
 
 //Розблокування звуків
 let audioUnlocked = false;
@@ -604,7 +581,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	}
 
-
 	// Обробка клавіш
 	document.addEventListener('keydown', (event) => {
 		if (document.getElementById('game-over-modal').style.display !== 'none') {
@@ -627,3 +603,22 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 });
 
+canvas.addEventListener('touchstart', e => {
+	e.preventDefault();
+	touchStartX = e.touches[0].clientX;
+	touchStartY = e.touches[0].clientY;
+}, { passive: false });
+
+canvas.addEventListener('touchend', e => {
+	e.preventDefault();
+	const dx = e.changedTouches[0].clientX - touchStartX;
+	const dy = e.changedTouches[0].clientY - touchStartY;
+
+	if (Math.abs(dx) > Math.abs(dy)) {
+		if (dx > 0 && dir.x !== -1) dir = { x: 1, y: 0 };
+		else if (dx < 0 && dir.x !== 1) dir = { x: -1, y: 0 };
+	} else {
+		if (dy > 0 && dir.y !== -1) dir = { x: 0, y: 1 };
+		else if (dy < 0 && dir.y !== 1) dir = { x: 0, y: -1 };
+	}
+});
