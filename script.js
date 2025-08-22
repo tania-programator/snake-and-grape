@@ -238,6 +238,7 @@ function draw() {
 	ctx.clearRect(0, 0, canvasSize, canvasSize);
 
 	// === Малювання змійки ===
+
 	for (let i = 0; i < snake.length; i++) {
 		let part = snake[i];
 
