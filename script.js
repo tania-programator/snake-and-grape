@@ -209,7 +209,7 @@ function startGame() {
 	poison = null; // Скидаю отруту
 	clearTimeout(poisonTimer);
 	clearInterval(game);
-	game = setInterval(draw, 120);
+	game = setInterval(draw, speed); // ← тепер використовує speed
 }
 //Функція перезапуску гри при втраті життів
 function resetFullGame() {
@@ -550,6 +550,23 @@ grapeImg.onload = imageReady;
 // 		});
 // 	}
 // });
+let speed = 120; // початкова швидкість (мс)
+
+// слухач на зміну швидкості
+const speedInput = document.getElementById('speed');
+if (speedInput) {
+	speedInput.addEventListener('input', () => {
+		speed = Number(speedInput.value);
+
+		// якщо гра вже запущена — перезапускаємо цикл з новим інтервалом
+		if (!gameOver) {
+			clearInterval(game);
+			game = setInterval(draw, speed);
+		}
+	});
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
 	const restartBtn = document.getElementById('restart-btn');
 	const exitBtn = document.getElementById('exit-btn');

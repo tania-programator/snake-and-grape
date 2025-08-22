@@ -23,6 +23,11 @@ canvas {
 	display: block;
 }
 
+#controls {
+	position: absolute;
+	top: 70%;
+	left: 50%;
+}
 
 /* Модальне вікно */
 .modal {

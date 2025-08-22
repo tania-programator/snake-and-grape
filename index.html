@@ -6,7 +6,7 @@
 	<title>Гра "Змія та виноград"</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- <link rel="stylesheet" href="style.css"> -->
-	<link rel="stylesheet" href="style.css?v=1.1">
+	<link rel="stylesheet" href="style.css?v=1.2">
 	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -15,7 +15,11 @@
 
 <body>
 	<canvas id="game" width="400" height="400"></canvas>
-
+	<!-- регулятор швидкості -->
+	<div id="controls">
+		<label for="speed">Швидкість:</label>
+		<input type="range" id="speed" min="50" max="300" step="10" value="120">
+	</div>
 	<!-- Модальне вікно поразки -->
 	<div id="game-over-modal" class="modal">
 		<p class="modal-text">
