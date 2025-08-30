@@ -14,32 +14,32 @@
 </head>
 
 <body>
-	<!-- Виношу неігрові елементи за межі canvas -->
-	<div id="hud">
-		<div id="lives-container"></div>
-		<div id="score-container">
-			<img src="img/score.png" id="score-icon" width="20" height="20">
-			<span id="score-value">0</span>
+	<div id="game-wrapper">
+		<!-- Виношу неігрові елементи за межі canvas -->
+		<div id="hud">
+			<div id="lives-container"></div>
+			<div id="score-container">
+				<img src="img/score.png" id="score-icon" width="20" height="20">
+				<span id="score-value">0</span>
+			</div>
+			<!-- регулятор швидкості -->
+			<div id="speed-container">
+				<label for="speed">Швидкість:</label>
+				<input type="range" id="speed" min="50" max="500" value="300">
+			</div>
 		</div>
-		<!-- регулятор швидкості -->
-		<div id="speed-container">
-			<label for="speed">Швидкість:</label>
-			<input type="range" id="speed" min="50" max="500" value="300">
+		<!-- canvas -->
+		<canvas id="game" width="400" height="400"></canvas>
+
+		<!-- Модальне вікно поразки -->
+		<div id="game-over-modal" class="modal">
+			<p class="modal-text">
+				Гра закінчена!<br>Рахунок: <span id="final-score">0</span>
+			</p>
+			<button id="restart-btn" class="btn gold">Грати ще раз</button>
+			<button id="exit-btn" class="btn gray">Вийти</button>
 		</div>
 	</div>
-	<!-- canvas -->
-	<canvas id="game" width="400" height="400"></canvas>
-
-	<!-- Модальне вікно поразки -->
-	<div id="game-over-modal" class="modal">
-		<p class="modal-text">
-			Гра закінчена!<br>Рахунок: <span id="final-score">0</span>
-		</p>
-		<button id="restart-btn" class="btn gold">Грати ще раз</button>
-		<button id="exit-btn" class="btn gray">Вийти</button>
-	</div>
-
-
 	<script src="script.js"></script>
 </body>
 

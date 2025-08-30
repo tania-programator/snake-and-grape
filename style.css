@@ -8,6 +8,16 @@ body {
 	position: relative;
 }
 
+#game-wrapper {
+	display: flex;
+	flex-direction: column;
+	/* вертикальний потік: HUD над canvas */
+	align-items: center;
+	/* центруємо по горизонталі */
+	gap: 10px;
+	/* відстань між HUD і canvas */
+}
+
 #hud {
 	display: flex;
 	flex-direction: column;
@@ -46,7 +56,6 @@ label[for="speed"] {
 	font-weight: bold;
 	/* за бажанням */
 	font-size: 14px;
-
 }
 
 canvas {
