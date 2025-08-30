@@ -227,12 +227,29 @@ function drawGameOverScreen() {
 	ctx.textBaseline = 'middle';
 	ctx.fillText('Рахунок: ' + score, canvasSize / 2, canvasSize / 2);
 }
-function drawHearts() {
+// Тимчасово закоментую фцію drawHearts, хочу винести неігрові ел за межі canvas
+// function drawHearts() {
+// 	for (let i = 0; i < maxLives; i++) {
+// 		const img = i < lives ? heartImg : heartBrokenImg;
+// 		ctx.drawImage(img, canvasSize - (i + 1) * (box + 5), 5, box, box);
+// 	}
+// }
+
+function updateHUD() {
+	const livesContainer = document.getElementById('lives-container');
+	livesContainer.innerHTML = ''; // очищуємо
 	for (let i = 0; i < maxLives; i++) {
-		const img = i < lives ? heartImg : heartBrokenImg;
-		ctx.drawImage(img, canvasSize - (i + 1) * (box + 5), 5, box, box);
+		const img = document.createElement('img');
+		img.src = i < lives ? 'img/heart.png' : 'img/heartBroken.png';
+		img.width = 20;
+		img.height = 20;
+		img.style.marginRight = '5px';
+		livesContainer.appendChild(img);
 	}
+
+	document.getElementById('score-value').textContent = score;
 }
+
 
 function draw() {
 	ctx.clearRect(0, 0, canvasSize, canvasSize);
@@ -282,18 +299,6 @@ function draw() {
 				let isVertical = (prev.x === part.x && next.x === part.x);
 				let isHorizontal = (prev.y === part.y && next.y === part.y);
 
-				// if (isVertical) {
-				// 	// Чергуємо картинки
-				// 	const img = verticalFrameToggle ? bodyVertical : bodyVerticalL;
-				// 	ctx.drawImage(img, part.x, part.y, box, box);
-				// } else if (isHorizontal) {
-				// 	// Чергуємо картинки
-				// 	const img = horizontalFrameToggle ? bodyHorizontalA : bodyHorizontalB;
-				// 	ctx.drawImage(img, part.x, part.y, box, box);
-				// } else {
-				// 	// якщо це кут — використовуємо вертикальне як запасне
-				// 	ctx.drawImage(bodyVertical, part.x, part.y, box, box);
-				// }
 				// Перевірка на поворот
 				let isTurn = (
 					(prev.x !== part.x && next.y !== part.y) ||
@@ -372,7 +377,7 @@ function draw() {
 
 	// Малювання сердець (життів)
 
-	drawHearts();
+	updateHUD();
 	// === Рух змійки ===
 	let head = { ...snake[0] };
 	if (direction === 'UP') head.y -= box;
@@ -403,7 +408,7 @@ function draw() {
 			//gameOverSound.play(); Звук програшу
 			playSound(gameOverSound);
 			// ОНОВЛЕННЯ! Намалювати розбиті серця перед екраном поразки
-			drawHearts();
+			updateHUD();
 			drawGameOverScreen();
 			setTimeout(() => {
 				document.getElementById('final-score').textContent = score;
@@ -451,6 +456,8 @@ function draw() {
 		food = spawnFood();
 		eatSound.play(); // ← Звук з'їдання яблука
 
+		updateHUD(); // ← Оновлюємо рахунок
+
 		// Якщо дозволено появу винограду — спробуємо його створити
 		if (!grape && score >= 20 && score < 30) {
 			grapeReady = true; // дозволяємо створити виноград
@@ -471,18 +478,18 @@ function draw() {
 		snake.pop();
 	}
 	// === Лічильник балів (зірка + цифра) ===
-	const scoreX = 10;           // X-позиція зірки
-	const scoreY = 10;           // Y-позиція зірки
-	const iconSize = 15;         // Розмір іконки
-
+	// const scoreX = 10;           // X-позиція зірки
+	// const scoreY = 10;           // Y-позиція зірки
+	// const iconSize = 15;         // Розмір іконки
+	updateHUD();
 	// Малюємо піктограму зірки
-	ctx.drawImage(scoreIcon, scoreX, scoreY, iconSize, iconSize);
+	// ctx.drawImage(scoreIcon, scoreX, scoreY, iconSize, iconSize);
 
 	// Текст рахунку
-	ctx.fillStyle = "#315114";   // Золотий колір (або будь-який)
-	ctx.font = "16px Arial";
-	ctx.textBaseline = "middle";
-	ctx.fillText(score, scoreX + iconSize + 8, scoreY + iconSize / 1.5);
+	// ctx.fillStyle = "#315114";   // Золотий колір (або будь-який)
+	// ctx.font = "16px Arial";
+	// ctx.textBaseline = "middle";
+	// ctx.fillText(score, scoreX + iconSize + 8, scoreY + iconSize / 1.5);
 
 }
 
@@ -512,51 +519,14 @@ heartBrokenImg.onload = imageReady;
 poisonImg.onload = imageReady;
 grapeImg.onload = imageReady;
 
-// document.addEventListener('DOMContentLoaded', () => {
-// 	const restartBtn = document.getElementById('restart-btn');
-// 	if (restartBtn) {
-// 		restartBtn.addEventListener('click', () => {
-// 			document.getElementById('game-over-modal').style.display = 'none';
-// 			resetFullGame();
-// 		});
-// 	}
-// 	// const exitBtn = document.getElementById('exit-btn');
-// 	// if (exitBtn) {
-// 	// 	exitBtn.addEventListener('click', () => {
-// 	// 		// Можеш замінити на перехід в меню або іншу дію
-// 	// 		window.location.reload(); // Перезапускає сторінку
-// 	// 	});
-// 	// }
-// 	// Обробник кнопки "Вийти"
-// 	const exitBtn = document.getElementById('exit-btn');
-// 	if (exitBtn) {
-// 		exitBtn.addEventListener('click', () => {
-// 			// Зупинити гру
-// 			clearInterval(game);
-// 			gameOver = true;
-
-// 			// Приховати модальне вікно
-// 			document.getElementById('game-over-modal').style.display = 'none';
-
-// 			// Очистити canvas
-// 			ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-// 			// Показати текст "Дякуємо за гру!"
-// 			ctx.fillStyle = 'green';
-// 			ctx.font = '54px Arial';
-// 			ctx.textAlign = 'center';
-// 			ctx.textBaseline = 'middle';
-// 			ctx.fillText('Дякуємо за гру!', canvas.width / 2, canvas.height / 2);
-// 		});
-// 	}
-// });
-let speed = 120; // початкова швидкість (мс)
+let speed = 300; // початкова швидкість (мс)
 
 // слухач на зміну швидкості
 const speedInput = document.getElementById('speed');
 if (speedInput) {
 	speedInput.addEventListener('input', () => {
-		speed = Number(speedInput.value);
+		// Інвертуємо значення, щоб більший повзунок = швидше
+		speed = Number(speedInput.max) - Number(speedInput.value) + Number(speedInput.min);
 
 		// якщо гра вже запущена — перезапускаємо цикл з новим інтервалом
 		if (!gameOver) {
@@ -641,4 +611,3 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 });
-
