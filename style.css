@@ -8,20 +8,53 @@ body {
 	position: relative;
 }
 
+#hud {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+#lives-container {
+	display: flex;
+	gap: 5px;
+}
+
+#score-container {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+
+#score-value {
+	color: gold;
+	/* або будь-який інший колір */
+	font-weight: bold;
+	font-size: 32px;
+}
+
+#speed-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+}
+
+label[for="speed"] {
+	color: rgb(16, 134, 230);
+	/* бажаний колір */
+	font-weight: bold;
+	/* за бажанням */
+	font-size: 14px;
+
+}
+
 canvas {
 	background: gold;
 	border: 20px solid #4CAF50;
 	touch-action: none;
 	/* забороняє прокрутку по канві */
 }
-
-#lives-container {
-	border: 5px dashed red;
-	display: inline-block;
-	border-radius: 5px;
-	padding: 3px;
-}
-
 
 /* Модальне вікно */
 .modal {
@@ -85,22 +118,4 @@ canvas {
 
 .btn.focused {
 	outline: 5px solid #ffffff;
-}
-
-#score-value {
-	color: gold;
-	/* або будь-який інший колір */
-	font-weight: bold;
-	font-size: 32px;
-}
-
-
-
-label[for="speed"] {
-	color: rgb(16, 134, 230);
-	/* бажаний колір */
-	font-weight: bold;
-	/* за бажанням */
-	font-size: 14px;
-
 }
