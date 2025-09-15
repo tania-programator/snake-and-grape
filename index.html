@@ -6,7 +6,7 @@
 	<title>Гра "Змія та виноград"</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- <link rel="stylesheet" href="style.css"> -->
-	<link rel="stylesheet" href="style.css?v=1.5">
+	<link rel="stylesheet" href="style.css?v=1.6">
 	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -27,10 +27,15 @@
 				<input type="range" id="speed" min="50" max="500" value="300">
 				<label for="speed"></label>
 			</div>
-		</div>
-		<!-- canvas -->
-		<canvas id="game" width="400" height="400"></canvas>
 
+		</div>
+		<!-- Кнопка для стрільби -->
+		<div class="shoot__btn">
+			<button id="shoot-btn">💥</button>
+
+			<!-- canvas -->
+			<canvas id="game" width="400" height="400"></canvas>
+		</div>
 		<!-- Модальне вікно поразки -->
 		<div id="game-over-modal" class="modal">
 			<p class="modal-text">
@@ -40,33 +45,7 @@
 			<button id="exit-btn" class="btn gray">Вийти</button>
 		</div>
 	</div>
-	<!-- Кнопка для стрільби -->
-	<button id="shoot-btn">💥</button>
 
-	<style>
-		#shoot-btn {
-			position: absolute;
-			bottom: 20px;
-			left: 20px;
-			width: 60px;
-			height: 60px;
-			border-radius: 50%;
-			border: none;
-			background: rgba(0, 128, 0, 0.8);
-			color: white;
-			font-size: 28px;
-			font-weight: bold;
-			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-			z-index: 1000;
-			/* поверх canvas */
-			user-select: none;
-		}
-
-		#shoot-btn:active {
-			background: rgba(0, 100, 0, 1);
-			transform: scale(0.95);
-		}
-	</style>
 	<script src="script.js"></script>
 </body>
 

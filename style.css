@@ -58,6 +58,40 @@ label[for="speed"] {
 	font-size: 14px;
 }
 
+.shoot__btn {
+	position: relative;
+}
+
+#shoot-btn {
+	position: absolute;
+	top: -60px;
+	left: 20px;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	border: none;
+	background: rgba(0, 128, 0, 0.8);
+	color: white;
+	font-size: 28px;
+	font-weight: bold;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+	z-index: 1000;
+	/* поверх canvas */
+	user-select: none;
+}
+
+#shoot-btn:active {
+	background: rgba(0, 100, 0, 1);
+	transform: scale(0.95);
+}
+
+/* Ховаємо кнопку на екранах ширших за 768px */
+@media (min-width: 768px) {
+	#shoot-btn {
+		display: none;
+	}
+}
+
 canvas {
 	width: 80%;
 	/* займати всю ширину контейнера / екрану */
