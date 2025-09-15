@@ -40,6 +40,33 @@
 			<button id="exit-btn" class="btn gray">Вийти</button>
 		</div>
 	</div>
+	<!-- Кнопка для стрільби -->
+	<button id="shoot-btn">💥</button>
+
+	<style>
+		#shoot-btn {
+			position: absolute;
+			bottom: 20px;
+			left: 20px;
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			border: none;
+			background: rgba(0, 128, 0, 0.8);
+			color: white;
+			font-size: 28px;
+			font-weight: bold;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+			z-index: 1000;
+			/* поверх canvas */
+			user-select: none;
+		}
+
+		#shoot-btn:active {
+			background: rgba(0, 100, 0, 1);
+			transform: scale(0.95);
+		}
+	</style>
 	<script src="script.js"></script>
 </body>
 

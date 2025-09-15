@@ -610,4 +610,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 	});
+	const shootBtn = document.getElementById('shoot-btn');
+	if (shootBtn) {
+		shootBtn.addEventListener('click', shootSeed);
+		shootBtn.addEventListener('touchstart', (e) => {
+			e.preventDefault(); // щоб не було залипання або скролу
+			shootSeed();
+		});
+	}
 });
